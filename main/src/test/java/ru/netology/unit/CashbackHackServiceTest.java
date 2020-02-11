@@ -24,7 +24,7 @@ class CashbackHackServiceTest {
 		int amount = 900;
 
 		int actual = service.remain(amount);
-		int expected = 100;
+		int expected = 101;
 
 		assertEquals(expected, actual);
 	}

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CashbackHackServiceTest {
 	@Test
-	void shouldReturn10IfAmountIs2000() {
+	void shouldReturn0IfAmountIs2000() {
 		CashbackHackService service = new CashbackHackService();
 		int amount = 2000;
 
@@ -19,13 +19,47 @@ class CashbackHackServiceTest {
 	}
 
 	@Test
-	void shouldReturnZeroIfAmountLowerThan1000() {
+	void shouldReturn1IfAmountIs999() {
 		CashbackHackService service = new CashbackHackService();
-		int amount = 900;
+		int amount = 999;
 
 		int actual = service.remain(amount);
-		int expected = 101;
+		int expected = 1;
 
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	void shouldReturn999IfAmountIs1() {
+		CashbackHackService service = new CashbackHackService();
+		int amount = 1;
+
+		int actual = service.remain(amount);
+		int expected = 999;
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void shouldReturn999IfAmountIs1001() {
+		CashbackHackService service = new CashbackHackService();
+		int amount = 1001;
+
+		int actual = service.remain(amount);
+		int expected = 999;
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void shouldReturn1IfAmountIs999999999() {
+		CashbackHackService service = new CashbackHackService();
+		int amount = 999999999;
+
+		int actual = service.remain(amount);
+		int expected = 1;
+
+		assertEquals(expected, actual);
+	}
+
 }

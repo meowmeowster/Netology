@@ -10,7 +10,7 @@ class CashbackHackServiceTest {
 	@Test
 	void shouldReturn0IfAmountIs2000() {
 		CashbackHackService service = new CashbackHackService();
-		int amount = 20001;
+		int amount = 2000;
 
 		int actual = service.remain(amount);
 		int expected = 0;

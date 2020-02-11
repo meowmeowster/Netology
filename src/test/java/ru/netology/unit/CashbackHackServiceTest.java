@@ -62,4 +62,40 @@ class CashbackHackServiceTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	void shouldReturnErrorIfAmountIs0() {
+		CashbackHackService service = new CashbackHackService();
+		int amount = 0;
+		String expected = "amount must be greater than zero";
+		try {
+			service.remain(amount);
+		} catch (IllegalArgumentException actual) {
+			assertEquals(expected, actual.getMessage());
+		}
+	}
+
+	@Test
+	void shouldReturnErrorIfAmountIsBelow0() {
+		CashbackHackService service = new CashbackHackService();
+		int amount = -100000000;
+		String expected = "amount must be greater than zero";
+		try {
+			service.remain(amount);
+		} catch (IllegalArgumentException actual) {
+			assertEquals(expected, actual.getMessage());
+		}
+	}
+
+	@Test
+	void shouldReturnErrorIfOverflow() {
+		CashbackHackService service = new CashbackHackService();
+		int amount = 999999999+999999999+999999999;
+		String expected = "amount must be greater than zero";
+		try {
+			service.remain(amount);
+		} catch (IllegalArgumentException actual) {
+			assertEquals(expected, actual.getMessage());
+		}
+	}
+
 }

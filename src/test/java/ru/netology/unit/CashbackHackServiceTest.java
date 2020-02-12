@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CashbackHackServiceTest {
 
-	private String exceptionMessage = "amount must be greater than zero";
+	private final String exceptionMessage = "amount must be greater than zero";
 
 	@Test
 	void shouldReturn1IfAmountIs999999999() {

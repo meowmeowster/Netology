@@ -6,9 +6,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.netology.service.CashbackHackService;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CashbackHackServiceTest {
+
+	private String exceptionMessage = "amount must be greater than zero";
 
 	@Test
 	void shouldReturn1IfAmountIs999999999() {
@@ -25,36 +29,44 @@ class CashbackHackServiceTest {
 	void shouldReturnErrorIfAmountIs0() {
 		CashbackHackService service = new CashbackHackService();
 		int amount = 0;
-		String expected = "amount must be greater than zero";
-		try {
+
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
 			service.remain(amount);
-		} catch (IllegalArgumentException actual) {
-			assertEquals(expected, actual.getMessage());
-		}
+		});
+
+		String expectedMessage = exceptionMessage;
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+
 	}
 
 	@Test
 	void shouldReturnErrorIfAmountIsBelow0() {
 		CashbackHackService service = new CashbackHackService();
 		int amount = -100000000;
-		String expected = "amount must be greater than zero";
-		try {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
 			service.remain(amount);
-		} catch (IllegalArgumentException actual) {
-			assertEquals(expected, actual.getMessage());
-		}
+		});
+
+		String expectedMessage = exceptionMessage;
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 	@Test
 	void shouldReturnErrorIfOverflow() {
 		CashbackHackService service = new CashbackHackService();
 		int amount = 999999999 + 999999999 + 999999999;
-		String expected = "amount must be greater than zero";
-		try {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
 			service.remain(amount);
-		} catch (IllegalArgumentException actual) {
-			assertEquals(expected, actual.getMessage());
-		}
+		});
+
+		String expectedMessage = exceptionMessage;
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 	@ParameterizedTest

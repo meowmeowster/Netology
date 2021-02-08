@@ -55,20 +55,6 @@ class CashbackHackServiceTest {
 		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
-	@Test
-	void shouldReturnErrorIfOverflow() {
-		CashbackHackService service = new CashbackHackService();
-		int amount = 999999999 + 999999999 + 999999999;
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			service.remain(amount);
-		});
-
-		String expectedMessage = exceptionMessage;
-		String actualMessage = exception.getMessage();
-
-		assertTrue(actualMessage.contains(expectedMessage));
-	}
-
 	@ParameterizedTest
 	@CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
 	void shouldReturnDataAccordingToTable(String input, String expect) {
